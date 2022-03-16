@@ -39,11 +39,15 @@ find_lto(CXX)
 # --------------------------------------------------------------------------------
 set(SOURCES          # All .cpp files in src/
     src/example.cpp
+    src/net.cpp
+    src/neuron.cpp
+    src/trainingData.cpp
+    app/utils.cpp
 )
 set(TESTFILES        # All .cpp files in tests/
     tests/main.cpp
 )
-set(LIBRARY_NAME engine)  # Default name for the library built from src/*.cpp (change if you wish)
+set(LIBRARY_NAME neuralNet)  # Name for the library built from src/*.cpp
 
 # --------------------------------------------------------------------------------
 #                            Build! (Change as needed)
@@ -79,3 +83,22 @@ set_target_properties(
 
 # Set up tests (see tests/CMakeLists.txt).
 add_subdirectory(tests)
+
+
+
+# display image with qt
+find_package(Qt5 COMPONENTS Widgets REQUIRED)
+
+if (${Qt5_FOUND})
+    message("Found Qt " ${Qt5_VERSION})
+else()
+    message("Couldn't find Qt")
+endif()
+
+add_executable(display_image_qt src/display_image_qt.cpp)   # Name of exec. and location of file.
+target_link_libraries(display_image_qt Qt5::Widgets)
+
+# display image with opencv
+find_package( OpenCV REQUIRED PATHS /home/mat/.local/lib/include/dlib)
+add_executable( display_image_ocv src/display_image_ocv.cpp )
+target_link_libraries( display_image_ocv ${OpenCV_LIBS} )
