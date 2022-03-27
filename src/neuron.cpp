@@ -10,8 +10,8 @@
 #include "neuron.h"
 #include "connection.h"
 
-double Neuron::sEta = 0.15;   // overall net learning rate, [0.0..1.0]
-double Neuron::sAlpha = 0.25; // momentum, multiplier of last deltaWeight, [0.0..1.0]
+double Neuron::sEta = 0.05;   // overall net learning rate, [0.0..1.0]
+double Neuron::sAlpha = 0.05; // momentum, multiplier of last deltaWeight, [0.0..1.0]
 
 
 Neuron::Neuron(unsigned numOutputs, unsigned myIndex)

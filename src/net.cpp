@@ -7,7 +7,7 @@
 
 using namespace std;
 
-double Net::mRecentAverageSmoothingFactor = 100.0; // Number of training samples to average over
+double Net::mRecentAverageSmoothingFactor = 10.0; // Number of training samples to average over
 
 Net::Net(const vector<unsigned> &topology)
 {
@@ -22,11 +22,12 @@ Net::Net(const vector<unsigned> &topology)
         for (unsigned neuronNum = 0; neuronNum <= topology[layerNum]; ++neuronNum)
         {
             mLayers.back().push_back(Neuron(numOutputs, neuronNum));
-            cout << "Made a Neuron!" << endl;
         }
+        cout << "Made " << topology[layerNum] + 1 << " neurons!" << endl;
         // force the bias node's output value to 1.0. It's the last neuron created above
         mLayers.back().back().setOutputVal(1.0);
     }
+    std::cout << "Made " << numLayers << " layers!" << std::endl;
 }
 
 Net::~Net()
@@ -109,7 +110,7 @@ void Net::feedForward(const vector<double> &inputVals)
 
 void Net::startTraining()
 {
-    //TODO : use it!
+    // TODO : use it!
     while (mTrainingIndex < (int)mInputs.size())
     {
         cout << "Index " << mTrainingIndex;
